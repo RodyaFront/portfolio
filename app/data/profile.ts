@@ -14,6 +14,15 @@ export type SkillGroup = {
   items: string[]
 }
 
+export type ExperienceProject = {
+  /** Short product name (public / NDA-safe). */
+  title: string
+  /** One line under the title. */
+  summary: string
+  /** Optional Portfolio case slug on this site. */
+  caseSlug?: string
+}
+
 export type ExperienceRole = {
   company: string
   title: string
@@ -25,7 +34,7 @@ export type ExperienceRole = {
   period: string
   location?: string
   highlights: string[]
-  projects?: string[]
+  projects?: ExperienceProject[]
   /** Latest commercial role; shown with a flag on the career timeline */
   current?: boolean
   /** When false, omitted from the homepage career timeline */
@@ -200,7 +209,12 @@ export const profile = {
         'Maintained code quality with TypeScript, ESLint, Prettier, Husky; supported CI/CD via GitHub Actions, Docker, AWS S3, and Ansible.',
       ],
       projects: [
-        'Role-based product platform (customer, expert, and admin Nuxt apps; Cognito, Stripe, Socket.IO)',
+        {
+          title: 'Role-based product platform',
+          summary:
+            'Customer, expert, and admin Nuxt apps; Cognito, Stripe, Socket.IO',
+          caseSlug: 'role-based-platform',
+        },
       ],
     },
     {
@@ -220,10 +234,24 @@ export const profile = {
         'Full frontend ownership in collaboration with backend teams.',
       ],
       projects: [
-        'SEO Analytics Platform (150+ dashboards, multilingual UI)',
-        'SEO Competitor Tool (migration + AI text analysis)',
-        'SaaS subscription platform (token-based billing)',
-        'Team Performance Tool (analytics dashboards)',
+        {
+          title: 'Link analytics platform',
+          summary: 'Task hub, backlink import, and 10+ analytics dashboards',
+          caseSlug: 'link-analytics-platform',
+        },
+        {
+          title: 'SEO content workspace',
+          summary: 'Competitor briefs, collaborative editor, SEO scoring',
+          caseSlug: 'seo-content-workspace',
+        },
+        {
+          title: 'SaaS subscription platform',
+          summary: 'Token-based billing and subscription management UI',
+        },
+        {
+          title: 'Team performance tool',
+          summary: 'Internal analytics dashboards for delivery metrics',
+        },
       ],
     },
     {
@@ -254,7 +282,16 @@ export const profile = {
         'FitTrack: dashboard UI with virtualized tables and Zustand state management.',
         'Integrated third-party APIs and applied performance-oriented UI patterns on data-heavy screens.',
       ],
-      projects: ['LinkVault', 'FitTrack'],
+      projects: [
+        {
+          title: 'LinkVault',
+          summary: 'Drag-and-drop builder with SSR and Redux Toolkit',
+        },
+        {
+          title: 'FitTrack',
+          summary: 'Dashboard UI with virtualized tables and Zustand',
+        },
+      ],
     },
   ] satisfies ExperienceRole[],
   achievements: [

@@ -112,12 +112,27 @@ function onBackdropClick(event: MouseEvent) {
 
       <div v-if="displayStop.projects?.length" class="experience-dialog-projects">
         <p class="experience-dialog-projects-label">Key projects</p>
-        <ul>
+        <ul class="experience-project-cards">
           <li
             v-for="project in displayStop.projects"
-            :key="project"
+            :key="project.title"
           >
-            {{ project }}
+            <article class="experience-project-card">
+              <h3 class="experience-project-card-title">
+                {{ project.title }}
+              </h3>
+              <p class="experience-project-card-summary">
+                {{ project.summary }}
+              </p>
+              <NuxtLink
+                v-if="project.caseSlug"
+                class="experience-project-card-link"
+                :to="`/projects/${project.caseSlug}`"
+                @click="requestClose"
+              >
+                Case page
+              </NuxtLink>
+            </article>
           </li>
         </ul>
       </div>
@@ -132,7 +147,7 @@ function onBackdropClick(event: MouseEvent) {
   border: 0;
   border-radius: calc(var(--radius) + 0.125rem);
   background: transparent;
-  max-width: min(36rem, calc(100vw - 2rem));
+  max-width: min(40rem, calc(100vw - 2rem));
   max-height: calc(100vh - 2rem);
   opacity: 0;
   transform: translateY(0.5rem) scale(0.98);
@@ -312,26 +327,54 @@ function onBackdropClick(event: MouseEvent) {
 }
 
 .experience-dialog-projects-label {
-  margin: 0 0 0.5rem;
+  margin: 0 0 0.75rem;
   font-size: 0.8125rem;
   font-weight: 600;
+  letter-spacing: 0.02em;
 }
 
-.experience-dialog-projects ul {
+.experience-project-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
+  gap: 0.625rem;
   margin: 0;
-  padding: 0 0 0 1.25rem;
-  list-style: disc;
-  list-style-position: outside;
+  padding: 0;
+  list-style: none;
+}
+
+.experience-project-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  height: 100%;
+  box-sizing: border-box;
+  padding: 0.75rem 0.875rem;
+  border: 1px solid rgb(26 26 26 / 0.12);
+  border-radius: var(--radius);
+  background-color: color-mix(in srgb, var(--bg-base) 55%, var(--bg-elevate));
+}
+
+.experience-project-card-title {
+  margin: 0;
   font-size: 0.875rem;
-  line-height: 1.45;
+  font-weight: 600;
+  line-height: 1.35;
+  color: #1a1a1a;
+}
+
+.experience-project-card-summary {
+  margin: 0;
+  flex: 1;
+  font-size: 0.8125rem;
+  line-height: 1.4;
   color: #5c5c5c;
 }
 
-.experience-dialog-projects li + li {
-  margin-top: 0.35rem;
-}
-
-.experience-dialog-projects li::marker {
-  color: #5c5c5c;
+.experience-project-card-link {
+  margin-top: 0.375rem;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  line-height: 1.3;
+  text-underline-offset: 0.125rem;
 }
 </style>
