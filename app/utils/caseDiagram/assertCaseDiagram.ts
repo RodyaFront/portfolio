@@ -132,7 +132,7 @@ function assertFlow(diagram: CaseDiagramFlow, context: string) {
  */
 export function assertCaseDiagram<T extends CaseDiagram>(
   diagram: T,
-  context = diagram.layout,
+  context: string = diagram.layout,
 ): T {
   switch (diagram.layout) {
     case 'triad':

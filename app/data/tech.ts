@@ -131,7 +131,7 @@ export function resolveTechs(inputs: readonly TechInput[]): TechDefinition[] {
  * Phrases to detect inside prose (longest first).
  * Matched text is kept as-is; icon comes from TechId.
  */
-const prosePhrases: { phrase: string; id: TechId }[] = [
+const prosePhraseSeed: { phrase: string; id: TechId }[] = [
   { phrase: 'Tailwind CSS', id: 'tailwind' },
   { phrase: 'Socket.IO', id: 'socketio' },
   { phrase: 'TypeScript', id: 'typescript' },
@@ -154,7 +154,11 @@ const prosePhrases: { phrase: string; id: TechId }[] = [
   { phrase: 'Nuxt', id: 'nuxt' },
   { phrase: 'Vue', id: 'vue' },
   { phrase: 'Git', id: 'git' },
-].sort((a, b) => b.phrase.length - a.phrase.length)
+]
+
+const prosePhrases = prosePhraseSeed
+  .slice()
+  .sort((a, b) => b.phrase.length - a.phrase.length)
 
 export type TechTextPart =
   | { type: 'text'; value: string }

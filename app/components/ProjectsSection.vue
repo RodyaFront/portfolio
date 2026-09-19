@@ -130,8 +130,10 @@ function onTabKeydown(event: KeyboardEvent) {
   }
 
   if (next < 0) return
+  const nextShelf = caseShelves[next]
+  if (!nextShelf) return
   event.preventDefault()
-  shelf.value = caseShelves[next]
+  shelf.value = nextShelf
 }
 
 function onRailKeydown(event: KeyboardEvent) {

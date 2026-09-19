@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+# Block direct pushes to master. Use a feature branch + PR instead.
+set -euo pipefail
+
+remote="${1:-}"
+url="${2:-}"
+
+while read -r local_ref local_sha remote_ref remote_sha; do
+  if [[ "$remote_ref" == "refs/heads/master" ]]; then
+    echo "error: direct push to master is blocked."
+    echo "Create a feature branch, open a PR, and wait for CI (generate)."
+    echo "See docs/git-workflow.md"
+    exit 1
+  fi
+done
+
+exit 0

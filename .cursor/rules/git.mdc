@@ -1,0 +1,12 @@
+---
+description: Git workflow - feature branches, no direct master, CI before prod
+alwaysApply: true
+---
+
+# Git workflow
+
+- **Never commit or push to `master`.** Create `feat/`, `fix/`, `chore/`, or `content/` branches.
+- Ship via **pull request**. Wait for CI (`generate` job: typecheck + `nuxt generate`).
+- Do not skip hooks, force-push `master`, or merge with failing checks.
+- After clone: `git config core.hooksPath .githooks`
+- Human doc: `docs/git-workflow.md`

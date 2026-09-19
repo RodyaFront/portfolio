@@ -7,6 +7,8 @@
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
+    "typecheck": "nuxt typecheck",
+    "ci": "npm run typecheck && npm run generate",
     "postinstall": "nuxt prepare",
     "tech:logos": "node scripts/optimize-tech-logos.mjs"
   },
@@ -17,6 +19,8 @@
     "vue-router": "^5.3.1"
   },
   "devDependencies": {
-    "sharp": "^0.35.4"
+    "sharp": "^0.35.4",
+    "typescript": "^5.9.2",
+    "vue-tsc": "^3.1.0"
   }
 }

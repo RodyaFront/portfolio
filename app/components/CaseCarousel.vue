@@ -26,10 +26,10 @@ const slides = computed(() => {
   const i = index.value
   if (n < 2) return []
   return [
-    { slot: 'prev', image: images[(i - 1 + n) % n] },
-    { slot: 'current', image: images[i] },
-    { slot: 'next', image: images[(i + 1) % n] },
-  ] as const
+    { slot: 'prev' as const, image: images[(i - 1 + n) % n]! },
+    { slot: 'current' as const, image: images[i]! },
+    { slot: 'next' as const, image: images[(i + 1) % n]! },
+  ]
 })
 
 function reducedMotion() {
