@@ -78,7 +78,7 @@ onBeforeUnmount(() => {
     <div class="site-header-inner mx-auto flex max-w-page flex-wrap items-center gap-x-6 gap-y-2 px-5">
       <a
         :href="homeHref"
-        class="site-header-brand font-medium text-ink no-underline hover:text-ink hover:underline"
+        class="site-header-brand"
       >
         {{ profile.name }}
       </a>
@@ -91,7 +91,7 @@ onBeforeUnmount(() => {
           v-for="item in profile.nav"
           :key="item.href"
           :href="sectionHref(item.href)"
-          class="site-header-link text-sm text-ink-mute no-underline hover:text-accent hover:underline"
+          class="site-header-link"
         >
           {{ item.label }}
         </a>
@@ -99,11 +99,29 @@ onBeforeUnmount(() => {
 
       <a
         :href="profile.contacts.telegram.href"
-        class="site-header-link site-header-telegram ml-auto text-sm font-medium text-accent no-underline hover:underline"
+        class="press-control site-header-telegram ml-auto"
         rel="noopener noreferrer"
         target="_blank"
       >
         Telegram
+        <svg
+          class="site-header-telegram-icon"
+          viewBox="0 0 24 24"
+          aria-hidden="true"
+          focusable="false"
+        >
+          <g
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.75"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M15 3h6v6" />
+            <path d="M10 14 21 3" />
+            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+          </g>
+        </svg>
       </a>
     </div>
   </header>
@@ -126,16 +144,81 @@ onBeforeUnmount(() => {
   padding-block: 0.5rem;
 }
 
-.site-header-link,
-.site-header-brand {
+.site-header-brand,
+.site-header-link {
   display: inline-flex;
   align-items: center;
   min-height: 2.75rem;
   padding-inline: 0.375rem;
+  text-decoration: none;
+}
+
+.site-header-brand,
+.site-header-brand:hover,
+.site-header-brand:focus-visible,
+.site-header-brand:visited {
+  color: #1a1a1a;
+  text-decoration: none;
+}
+
+.site-header-brand:hover {
+  text-decoration: underline;
+}
+
+.site-header-brand {
+  font-weight: 500;
+}
+
+.site-header-link,
+.site-header-link:visited {
+  color: #5c5c5c;
+  font-size: 0.875rem;
+  text-decoration: none;
+}
+
+.site-header-link:hover,
+.site-header-link:focus-visible {
+  color: #1a56db;
+  text-decoration: underline;
 }
 
 .site-header-telegram {
-  padding-inline: 0.5rem;
+  --press-face: #26a5e4;
+  --action-color: #26a5e4;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  min-height: 2.5rem;
+  margin: 0;
+  padding: 0 0.75rem;
+  border: 0;
+  border-radius: 999px;
+  background-color: #26a5e4;
+  color: #fff;
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1.2;
+  text-decoration: none;
+}
+
+.site-header-telegram,
+.site-header-telegram:hover,
+.site-header-telegram:focus-visible,
+.site-header-telegram:visited {
+  color: #fff;
+  text-decoration: none;
+}
+
+.site-header-telegram:hover {
+  background-color: #1f94cf;
+}
+
+.site-header-telegram-icon {
+  display: block;
+  width: 0.875rem;
+  height: 0.875rem;
+  flex-shrink: 0;
+  opacity: 0.9;
 }
 
 .site-header-elevated {
