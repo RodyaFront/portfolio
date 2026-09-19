@@ -1,5 +1,9 @@
 <script setup lang="ts">
 import { profile } from '~/data/profile'
+import { actionVisuals } from '~/data/actions'
+import ActionIcon from '~/components/ActionIcon.vue'
+
+const telegramVisual = actionVisuals.telegram
 
 const route = useRoute()
 
@@ -102,12 +106,14 @@ onBeforeUnmount(() => {
       <a
         :href="profile.contacts.telegram.href"
         class="press-control site-header-telegram shrink-0"
+        :style="{ '--action-color': telegramVisual.color }"
         rel="noopener noreferrer"
         target="_blank"
       >
-        Telegram
+        <ActionIcon :name="telegramVisual.icon" />
+        <span>Telegram</span>
         <svg
-          class="site-header-telegram-icon"
+          class="site-header-telegram-external"
           viewBox="0 0 24 24"
           aria-hidden="true"
           focusable="false"
@@ -185,20 +191,19 @@ onBeforeUnmount(() => {
 }
 
 .site-header-telegram {
-  --press-face: #26a5e4;
-  --action-color: #26a5e4;
+  --press-face: color-mix(in srgb, var(--action-color) 9%, var(--bg-base));
   display: inline-flex;
   align-items: center;
-  gap: 0.25rem;
-  min-height: 1.875rem;
+  gap: 0.375rem;
+  min-height: 2rem;
   margin: 0;
-  padding: 0 0.5rem;
+  padding: 0.25rem 0.625rem;
   border: 0;
-  border-radius: 999px;
-  background-color: #26a5e4;
-  color: #fff;
+  border-radius: var(--radius);
+  background-color: color-mix(in srgb, var(--action-color) 9%, var(--bg-base));
+  color: var(--action-color);
   font-size: 0.8125rem;
-  font-weight: 500;
+  font-weight: 600;
   line-height: 1.2;
   text-decoration: none;
 }
@@ -207,20 +212,25 @@ onBeforeUnmount(() => {
 .site-header-telegram:hover,
 .site-header-telegram:focus-visible,
 .site-header-telegram:visited {
-  color: #fff;
+  color: var(--action-color);
   text-decoration: none;
 }
 
 .site-header-telegram:hover {
-  background-color: #1f94cf;
+  background-color: color-mix(in srgb, var(--action-color) 14%, var(--bg-base));
 }
 
-.site-header-telegram-icon {
-  display: block;
+.site-header-telegram :deep(.action-icon) {
+  width: 1rem;
+  height: 1rem;
+}
+
+.site-header-telegram-external {
   width: 0.75rem;
   height: 0.75rem;
+  margin-left: 0.125rem;
   flex-shrink: 0;
-  opacity: 0.9;
+  opacity: 0.55;
 }
 
 .site-header-elevated {
