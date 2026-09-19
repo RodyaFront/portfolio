@@ -97,15 +97,18 @@ export function getTotalExperience(
   const stops = experience.filter((role) => role.timeline !== false)
   if (!stops.length) return null
 
+  const first = stops[0]
+  if (!first) return null
+
   const start = stops.reduce(
     (min, role) => (role.start < min ? role.start : min),
-    stops[0].start,
+    first.start,
   )
 
   const end = stops.reduce((max, role) => {
     if (role.end === 'present' || max === 'present') return 'present'
     return role.end > max ? role.end : max
-  }, stops[0].end)
+  }, first.end)
 
   const durationLabel = formatDurationLabel(start, end, now)
   const from = parseYearMonth(start)

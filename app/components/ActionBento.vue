@@ -18,10 +18,18 @@ const props = defineProps<{
 }>()
 
 const tiles = computed(() =>
-  (props.actions ?? profile.hero.actions).map((action) => ({
-    ...action,
-    ...actionVisuals[action.id],
-  })),
+  (props.actions ?? profile.hero.actions).map((action) => {
+    const visual = actionVisuals[action.id]
+    const external =
+      'external' in action ? action.external === true : false
+    return {
+      ...visual,
+      id: action.id,
+      label: action.label,
+      href: action.href,
+      external,
+    }
+  }),
 )
 </script>
 

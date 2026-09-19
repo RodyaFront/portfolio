@@ -19,7 +19,12 @@
 ```bash
 npm run dev
 npm run generate
+npm run ci
 npm run tech:logos
 ```
+
+`ci` = typecheck + static generate (то же, что GitHub Actions перед merge в `master`).
+
+Git: только feature-ветки и PR в `master` - см. [`docs/git-workflow.md`](docs/git-workflow.md). После клона: `git config core.hooksPath .githooks`.
 
 `tech:logos` качает исходники в `assets/tech/source/` и пишет оптимизированные 32/64/128 WebP в `public/tech/{id}/`.

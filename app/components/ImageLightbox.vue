@@ -73,10 +73,10 @@ const slides = computed(() => {
   const i = index.value
   if (n < 2) return []
   return [
-    { slot: 'prev', image: images[(i - 1 + n) % n] },
-    { slot: 'current', image: images[i] },
-    { slot: 'next', image: images[(i + 1) % n] },
-  ] as const
+    { slot: 'prev' as const, image: images[(i - 1 + n) % n]! },
+    { slot: 'current' as const, image: images[i]! },
+    { slot: 'next' as const, image: images[(i + 1) % n]! },
+  ]
 })
 
 function reducedMotion() {
@@ -295,7 +295,9 @@ function onPointerDown(event: PointerEvent) {
 
   if (pointers.size === 2) {
     clearHoldTimer()
-    const [a, b] = [...pointers.values()]
+    const points = [...pointers.values()]
+    const a = points[0]!
+    const b = points[1]!
     lastPinchDist = Math.hypot(a.x - b.x, a.y - b.y)
     gesture = 'pinching'
     pinching.value = true
@@ -328,7 +330,9 @@ function onPointerMove(event: PointerEvent) {
   pointers.set(event.pointerId, { x: event.clientX, y: event.clientY })
 
   if (gesture === 'pinching' && pointers.size === 2) {
-    const [a, b] = [...pointers.values()]
+    const points = [...pointers.values()]
+    const a = points[0]!
+    const b = points[1]!
     const dist = Math.hypot(a.x - b.x, a.y - b.y)
     if (lastPinchDist) {
       zoomAt((a.x + b.x) / 2, (a.y + b.y) / 2, dist / lastPinchDist)
