@@ -131,6 +131,21 @@ function onBackdropClick(event: MouseEvent) {
                 @click="requestClose"
               >
                 Case page
+                <svg
+                  class="experience-project-card-link-icon"
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                  focusable="false"
+                >
+                  <path
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.75"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="m9 18 6-6-6-6"
+                  />
+                </svg>
               </NuxtLink>
             </article>
           </li>
@@ -376,9 +391,10 @@ function onBackdropClick(event: MouseEvent) {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  gap: 0.25rem;
   margin-top: 0.5rem;
   min-height: 1.75rem;
-  padding: 0 0.625rem;
+  padding: 0 0.5rem 0 0.625rem;
   border: 1px solid rgb(26 26 26 / 0.16);
   border-radius: 999px;
   background-color: var(--bg-elevate, #fff);
@@ -387,6 +403,13 @@ function onBackdropClick(event: MouseEvent) {
   font-weight: 500;
   line-height: 1.2;
   text-decoration: none;
+}
+
+.experience-project-card-link-icon {
+  display: block;
+  width: 0.875rem;
+  height: 0.875rem;
+  flex-shrink: 0;
 }
 
 .experience-project-card-link:hover,
