@@ -1,12 +1,12 @@
 # Git workflow
 
-Protects production from broken builds and accidental pushes to `master`.
+Convention for humans and agents. Not a hard GitHub lock on `master` - follow it anyway so prod stays green.
 
 ## Rules
 
 1. **Never commit or push to `master` directly.** Always use a feature branch.
-2. **Merge only via pull request.** GitHub ruleset on `master` requires a PR.
-3. **CI must pass** before merge: `npm run typecheck` and `npm run generate`.
+2. **Ship via pull request.** Open a PR into `master`; do not push the deploy branch yourself.
+3. **Run CI before merge.** Wait for the `generate` check (typecheck + `nuxt generate`), or run `npm run ci` locally first.
 
 ## Branch naming
 
@@ -23,7 +23,7 @@ content/...  copy / case data only
 git config core.hooksPath .githooks
 ```
 
-The `pre-push` hook refuses pushes whose remote ref is `master`.
+Optional safety net: `pre-push` refuses a direct push whose remote ref is `master`.
 
 ## Day-to-day
 
@@ -37,7 +37,7 @@ git push -u origin HEAD
 gh pr create
 ```
 
-After CI is green, merge the PR on GitHub (squash or merge). Do not push to `master`.
+After CI is green, merge the PR on GitHub. Do not push to `master`.
 
 ## CI
 
@@ -52,4 +52,4 @@ Local equivalent: `npm run ci`.
 
 ## Production
 
-`master` is the deploy branch. Only green PR merges update it. Broken typecheck or generate fails the required status check and blocks merge.
+`master` is the deploy branch. Prefer only green PR merges. Broken typecheck or generate fails the PR check - do not merge red CI.

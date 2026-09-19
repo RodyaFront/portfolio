@@ -5,8 +5,11 @@ alwaysApply: true
 
 # Git workflow
 
+Hard rule for this agent (convention, not optional):
+
 - **Never commit or push to `master`.** Create `feat/`, `fix/`, `chore/`, or `content/` branches.
-- Ship via **pull request**. Wait for CI (`generate` job: typecheck + `nuxt generate`).
+- Ship via **pull request** into `master`. Do not push the deploy branch directly.
+- Wait for CI (`generate` job: typecheck + `nuxt generate`) or run `npm run ci` before asking to merge.
 - Do not skip hooks, force-push `master`, or merge with failing checks.
-- After clone: `git config core.hooksPath .githooks`
+- After clone (once): `git config core.hooksPath .githooks`
 - Human doc: `docs/git-workflow.md`
