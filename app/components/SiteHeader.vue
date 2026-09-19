@@ -111,7 +111,7 @@ onBeforeUnmount(() => {
         target="_blank"
       >
         <ActionIcon :name="telegramVisual.icon" />
-        <span>Telegram</span>
+        <span>Напишите мне</span>
         <svg
           class="site-header-telegram-external"
           viewBox="0 0 24 24"
