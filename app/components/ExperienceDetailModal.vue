@@ -126,7 +126,7 @@ function onBackdropClick(event: MouseEvent) {
               </p>
               <NuxtLink
                 v-if="project.caseSlug"
-                class="experience-project-card-link"
+                class="press-control experience-project-card-link"
                 :to="`/projects/${project.caseSlug}`"
                 @click="requestClose"
               >
@@ -371,10 +371,28 @@ function onBackdropClick(event: MouseEvent) {
 }
 
 .experience-project-card-link {
-  margin-top: 0.375rem;
-  font-size: 0.8125rem;
+  --press-face: var(--bg-elevate);
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 0.5rem;
+  min-height: 1.75rem;
+  padding: 0 0.625rem;
+  border: 1px solid rgb(26 26 26 / 0.16);
+  border-radius: 999px;
+  background-color: var(--bg-elevate, #fff);
+  color: #1a1a1a;
+  font-size: 0.75rem;
   font-weight: 500;
-  line-height: 1.3;
-  text-underline-offset: 0.125rem;
+  line-height: 1.2;
+  text-decoration: none;
+}
+
+.experience-project-card-link:hover,
+.experience-project-card-link:focus-visible,
+.experience-project-card-link:visited {
+  color: #1a1a1a;
+  text-decoration: none;
 }
 </style>
