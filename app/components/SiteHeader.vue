@@ -75,31 +75,33 @@ onBeforeUnmount(() => {
     }"
     @focusin="onHeaderFocusIn"
   >
-    <div class="site-header-inner mx-auto flex max-w-page flex-wrap items-center gap-x-6 gap-y-2 px-5">
-      <a
-        :href="homeHref"
-        class="site-header-brand"
-      >
-        {{ profile.name }}
-      </a>
-
-      <nav
-        class="flex flex-wrap items-center gap-x-1 gap-y-1"
-        aria-label="Page sections"
-      >
+    <div class="site-header-inner mx-auto flex max-w-page items-center gap-x-4 px-5">
+      <div class="flex min-w-0 flex-1 flex-wrap items-center gap-x-6 gap-y-1">
         <a
-          v-for="item in profile.nav"
-          :key="item.href"
-          :href="sectionHref(item.href)"
-          class="site-header-link"
+          :href="homeHref"
+          class="site-header-brand"
         >
-          {{ item.label }}
+          {{ profile.name }}
         </a>
-      </nav>
+
+        <nav
+          class="flex flex-wrap items-center gap-x-1 gap-y-1"
+          aria-label="Page sections"
+        >
+          <a
+            v-for="item in profile.nav"
+            :key="item.href"
+            :href="sectionHref(item.href)"
+            class="site-header-link"
+          >
+            {{ item.label }}
+          </a>
+        </nav>
+      </div>
 
       <a
         :href="profile.contacts.telegram.href"
-        class="press-control site-header-telegram ml-auto"
+        class="press-control site-header-telegram shrink-0"
         rel="noopener noreferrer"
         target="_blank"
       >
@@ -187,15 +189,15 @@ onBeforeUnmount(() => {
   --action-color: #26a5e4;
   display: inline-flex;
   align-items: center;
-  gap: 0.375rem;
-  min-height: 2.5rem;
+  gap: 0.25rem;
+  min-height: 1.875rem;
   margin: 0;
-  padding: 0 0.75rem;
+  padding: 0 0.5rem;
   border: 0;
   border-radius: 999px;
   background-color: #26a5e4;
   color: #fff;
-  font-size: 0.875rem;
+  font-size: 0.8125rem;
   font-weight: 500;
   line-height: 1.2;
   text-decoration: none;
@@ -215,8 +217,8 @@ onBeforeUnmount(() => {
 
 .site-header-telegram-icon {
   display: block;
-  width: 0.875rem;
-  height: 0.875rem;
+  width: 0.75rem;
+  height: 0.75rem;
   flex-shrink: 0;
   opacity: 0.9;
 }
