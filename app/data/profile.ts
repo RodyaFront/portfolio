@@ -199,6 +199,9 @@ export const profile = {
         'Delivered admin tools for moderation, manager accounts, refunds, and localization, including a custom i18n editor with publish workflow.',
         'Maintained code quality with TypeScript, ESLint, Prettier, Husky; supported CI/CD via GitHub Actions, Docker, AWS S3, and Ansible.',
       ],
+      projects: [
+        'Role-based product platform (customer, expert, and admin Nuxt apps; Cognito, Stripe, Socket.IO)',
+      ],
     },
     {
       company: 'Boosta',

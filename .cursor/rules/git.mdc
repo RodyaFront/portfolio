@@ -1,5 +1,5 @@
 ---
-description: Git workflow - feature branches, no direct master, CI before prod
+description: Git workflow - one branch per agent session, no direct master, CI before prod
 alwaysApply: true
 ---
 
@@ -7,8 +7,11 @@ alwaysApply: true
 
 Hard rule for this agent (convention, not optional):
 
-- **Never commit or push to `master`.** Create `feat/`, `fix/`, `chore/`, or `content/` branches.
-- Ship via **pull request** into `master`. Do not push the deploy branch directly.
+- **Never commit or push to `master`.** Use one **session branch** for the whole chat/session of work.
+- **Do not open a new branch per small feature** inside the same session. Keep stacking commits on the active `session/...` branch so nothing is stashed and abandoned.
+- At session start: if already on a `session/...` branch for this work, stay on it; otherwise create `session/YYYY-MM-DD-short-slug` from updated `master`.
+- **Never `git stash` as a substitute for committing** session work. Commit WIP on the session branch (or ask the user). Stash only for a true temporary conflict the user asked to resolve that way.
+- Ship via **pull request** into `master` when the user asks to merge/ship. Do not push `master` directly.
 - Wait for CI (`generate` job: typecheck + `nuxt generate`) or run `npm run ci` before asking to merge.
 - Do not skip hooks, force-push `master`, or merge with failing checks.
 - After clone (once): `git config core.hooksPath .githooks`

@@ -19,6 +19,7 @@
     --space-section: 3rem;
     --page-max: calc(var(--case-col) * 2 + var(--case-gap) + var(--page-gutter) * 2);
     --hero-max: 42rem;
+    --header-offset: 4.5rem;
     --press-from: scale(1);
     --press-hover-scale: 1.03;
     --press-active-scale: 0.97;
@@ -61,7 +62,16 @@
   }
 
   :target {
-    scroll-margin-top: 4.5rem;
+    scroll-margin-top: var(--header-offset);
+  }
+
+  #main,
+  #top,
+  #portfolio,
+  #design,
+  #contact,
+  #experience {
+    scroll-margin-top: var(--header-offset);
   }
 }
 
