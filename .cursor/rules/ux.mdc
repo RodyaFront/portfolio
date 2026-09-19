@@ -1,0 +1,84 @@
+---
+description: Expected UX bar for the portfolio - craft practices a hiring client should see
+alwaysApply: true
+---
+
+# Portfolio UX
+
+Principle: **maximum competent UX, minimum useless UI.**
+
+The site is a demo of production craft. Every change must read as work a Vue/Nuxt owner would ship - not a decorative landing.
+
+Useless UI is noise that does not help the page job. Useful UI is still UI: type, color, components, states. Do not flatten the site into an unstyled document.
+
+Human docs: `docs/design.md`, `docs/works-plan.md`. Content canon: `app/data/profile.ts`.
+
+## Page job (top to bottom)
+
+1. Who / role / where
+2. Why hire (ownership, Vue/Nuxt, design)
+3. Portfolio
+4. Contact within one action
+
+If a block does not move this path - delete it.
+
+## Required practices
+
+### Accessibility
+- Skip link to main content
+- Keyboard operable; visible `:focus-visible`
+- Landmark regions; one `h1`; logical `h2+`
+- Contrast that holds on paper background
+- Real `alt` on work images; decorative images empty `alt`
+
+### Typography & layout
+- One column; predictable spacing scale
+- Readable measure (`max-w-page` / prose width)
+- Hierarchy via type and weight - not cards, shadows, gradients
+- System or one self-hosted face; no font packs “for mood”
+
+### Interaction
+- Links look like links; one accent color for actions
+- Hover, focus, visited, and active/tap states
+- Shared press for boxed controls (`main.css`): hover slightly scales up and tints; active/tap slightly scales down. Obvious buttons keep a 2px transparent outline at rest so `outline-color` can transition; on press it becomes a darker shade of the button face (same hue). Brand tiles use a darker shade of the brand color, not a gray mix of the wash. Photos use an ink wash instead of recoloring pixels. Text links stay color + underline (do not scale glyphs).
+- Honor `prefers-reduced-motion` (no press scale)
+- Tap targets usable on mobile (~44px)
+- Anchors with `scroll-margin` under the header
+- Prefer page + anchors + external URLs over modals
+
+### Performance & delivery
+- Prefer static (`nuxt generate`); no backend for the brochure site
+- Images only for real work; sized; modern formats when added
+- Work screenshots are dual-res (preview + full for lightbox). Pipeline: `.cursor/rules/work-images.mdc`, `scripts/work-images.mjs`, `docs/works-plan.md` (Assets)
+- NDA without publishable shots: validated abstract diagram + pitch on the card; facts on the case page (`docs/case-diagrams.md`). Do not invent screenshots; do not treat the diagram as lightbox media
+- No Lottie, marquee, grain, glow, fake stats, or motion for wow
+
+### Content & SEO
+- English UI copy aligned with CV
+- Honest `title` / `description` / `lang`
+- Traceable cases: name, role, stack, outcome, one real link
+- No dead CTAs, invented metrics, or client IP without clearance
+- No AI typography artifacts in site copy (see `.cursor/rules/content.mdc`): no em/en dashes, guillemets, decorative `<>` / arrows
+
+### Design system signal
+- Tokens: paper / ink / accent (see `tailwind.config.ts`)
+- Reuse patterns; do not invent one-off chrome per section
+- Dribbble shots are artifacts; site chrome stays neutral
+- Stack keywords: use `TechText` so logos sit inline before names already in the sentence (not a separate tech row). Registry: `app/data/tech.ts`
+
+## Anti-patterns
+
+```text
+BAD: Full-viewport marketing hero, glass nav, gradient CTAs
+BAD: Modal case studies when a link or inline block is enough
+BAD: Decorative grids, stickers, fake dashboards
+BAD: Copying shot aesthetics onto the shell
+```
+
+```text
+GOOD: Compact identity hero + clear sections
+GOOD: List/grid of real work with one primary action each
+GOOD: Quiet shell; craft shows in type, contrast, focus, speed
+```
+
+When unsure: ship clarity and standards over ornament. Do not invent a restyle unless asked.

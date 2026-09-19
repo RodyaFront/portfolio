@@ -1,0 +1,42 @@
+---
+description: Dual-res work screenshots (preview + full) for portfolio cases and lightbox
+alwaysApply: true
+---
+
+# Work screenshots (dual-res)
+
+Every product / case image on the site is a **pair**. Do not ship a single webp for both the page and the lightbox.
+
+## Model
+
+| Role | File | Use |
+|------|------|-----|
+| Preview | `public/work/{case}/{name}-preview.webp` | Cards, case page, carousel |
+| Full | `public/work/{case}/{name}-full.webp` | `ImageLightbox` zoom only |
+
+Wire both in `app/data/cases.ts` via `CaseImage`:
+
+- `src` / `width` / `height` → preview
+- `srcFull` / `fullWidth` / `fullHeight` → full (required when adding shots)
+
+## Pipeline (mandatory when adding or replacing shots)
+
+1. Prefer **native** captures (browser/OS, long edge 1600+). Chat-compressed ~1024px is OK for preview, weak for lightbox zoom - note that if no better source exists.
+2. Keep a source copy under `assets/work/{case}/` (png/jpg).
+3. Run:
+
+```bash
+node scripts/work-images.mjs --case <slug> --name <kebab-name> <source.png>
+```
+
+4. Paste the printed `CaseImage` fields into `cases.ts` (`preview` and/or `images`).
+5. Real `alt` text. No stitching / fake full-page composites - use the capture as-is.
+
+## Do not
+
+- Point lightbox and page at the same file
+- Upscale small chat attachments and call them "full"
+- Invent empty/error UI shots you do not have
+- Commit secrets or huge raw dumps outside `assets/work/` + generated `public/work/`
+
+Script details and flags: `scripts/work-images.mjs`. Human plan: `docs/works-plan.md` (Assets).

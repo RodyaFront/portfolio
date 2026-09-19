@@ -1,0 +1,315 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Theme surface: swap these for dark / other themes. Dots use --pattern-dot. */
+    --radius: 0.5rem;
+    --bg-base: #f8f8f8;
+    --bg-elevate: #ffffff;
+    --pattern-dot: rgb(26 26 26 / 0.1);
+    --pattern-size: 1.875rem;
+    --case-col: 33.75rem;
+    --case-gap: 1.5rem;
+    --page-gutter: 1.25rem;
+    --space-tight: 0.5rem;
+    --space-related: 1.5rem;
+    --space-block: 2rem;
+    --space-section: 3rem;
+    --page-max: calc(var(--case-col) * 2 + var(--case-gap) + var(--page-gutter) * 2);
+    --hero-max: 42rem;
+    --press-from: scale(1);
+    --press-hover-scale: 1.03;
+    --press-active-scale: 0.97;
+    --press-ms: 140ms;
+    --press-wash: rgb(26 26 26 / 0.1);
+    --press-face: var(--bg-elevate);
+    --press-ring: oklch(from var(--press-face) calc(l - 0.14) c h);
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--bg-base);
+    color: #1a1a1a;
+    font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  a {
+    color: #1a56db;
+    text-underline-offset: 0.125rem;
+  }
+
+  a:hover {
+    color: #1347b8;
+    text-decoration-line: underline;
+  }
+
+  a:visited {
+    color: #5b3d8f;
+  }
+
+  a:focus-visible,
+  button:focus-visible {
+    outline: 2px solid #1a56db;
+    outline-offset: 2px;
+  }
+
+  :target {
+    scroll-margin-top: 4.5rem;
+  }
+}
+
+@layer components {
+  .skip-link {
+    position: absolute;
+    left: 1rem;
+    top: 0;
+    z-index: 100;
+    transform: translateY(-100%);
+    border-radius: var(--radius);
+    background-color: #1a1a1a;
+    padding: 0.5rem 0.75rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #f7f4ef;
+    text-decoration: none;
+  }
+
+  .skip-link:focus {
+    transform: translateY(1rem);
+    color: #f7f4ef;
+    text-decoration: none;
+    outline: none;
+  }
+
+  .skip-link:visited {
+    color: #f7f4ef;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 2.75rem;
+    padding: 0 1rem;
+    border-radius: var(--radius);
+    font-size: 0.9375rem;
+    font-weight: 500;
+    line-height: 1.25;
+    text-decoration: none;
+  }
+
+  a.btn:hover,
+  a.btn:visited,
+  a.btn:focus-visible {
+    text-decoration: none;
+  }
+
+  .btn-primary {
+    --press-face: #1a1a1a;
+    background-color: #1a1a1a;
+    color: #f7f4ef;
+  }
+
+  a.btn-primary,
+  a.btn-primary:hover,
+  a.btn-primary:visited,
+  a.btn-primary:focus-visible {
+    color: #f7f4ef;
+  }
+
+  a.btn-primary:hover {
+    background-color: #2e2e2e;
+  }
+
+  .btn-secondary {
+    --press-face: var(--bg-elevate);
+    border: 1px solid rgb(26 26 26 / 0.22);
+    background-color: transparent;
+    color: #1a1a1a;
+  }
+
+  a.btn-secondary,
+  a.btn-secondary:hover,
+  a.btn-secondary:visited,
+  a.btn-secondary:focus-visible {
+    color: #1a1a1a;
+  }
+
+  a.btn-secondary:hover {
+    border-color: #1a1a1a;
+    background-color: rgb(26 26 26 / 0.05);
+  }
+
+  /*
+    Shared press: hover = slight scale + tint; active/tap = slight press.
+    Boxed controls (.btn, tiles, icon buttons) use .press-control.
+    Photos use .press-media (zoom inside clip + ink wash). Text links stay color + underline.
+  */
+  .btn,
+  .action-tile,
+  .press-control {
+    --press-ring: oklch(from var(--press-face) calc(l - 0.14) c h);
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+    transform: var(--press-from);
+    transition:
+      transform var(--press-ms) ease,
+      background-color var(--press-ms) ease,
+      border-color var(--press-ms) ease,
+      color var(--press-ms) ease,
+      filter var(--press-ms) ease,
+      outline-color var(--press-ms) ease;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .action-tile {
+    --press-face: color-mix(in srgb, var(--action-color) 9%, var(--bg-base));
+    --press-ring: oklch(from var(--action-color) calc(l - 0.12) c h);
+  }
+
+  .action-tile-ink {
+    --press-face: var(--bg-elevate);
+    --press-ring: oklch(from var(--press-face) calc(l - 0.14) c h);
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .btn:hover,
+    .action-tile:hover,
+    .press-control:hover {
+      transform: var(--press-from) scale(var(--press-hover-scale));
+    }
+  }
+
+  .btn:focus-visible,
+  .action-tile:focus-visible,
+  .press-control:focus-visible {
+    outline-color: #1a56db;
+  }
+
+  .btn:active,
+  .action-tile:active,
+  .press-control:active {
+    transform: var(--press-from) scale(var(--press-active-scale));
+    outline-color: var(--press-ring);
+  }
+
+  .press-media {
+    position: relative;
+    overflow: hidden;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .press-media::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    background-color: rgb(26 26 26 / 0);
+    transition: background-color var(--press-ms) ease;
+  }
+
+  .press-media img {
+    transition: transform var(--press-ms) ease;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .press-media:hover::after {
+      background-color: var(--press-wash);
+    }
+
+    .press-media:hover img {
+      transform: scale(var(--press-hover-scale));
+    }
+  }
+
+  .press-media:active::after {
+    background-color: rgb(26 26 26 / 0.16);
+  }
+
+  .press-media:active img {
+    transform: scale(var(--press-active-scale));
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .btn,
+    .action-tile,
+    .press-control {
+      transition:
+        outline-color var(--press-ms) ease,
+        background-color var(--press-ms) ease,
+        border-color var(--press-ms) ease,
+        color var(--press-ms) ease;
+    }
+
+    .press-media img {
+      transition: none;
+    }
+
+    .btn:hover,
+    .btn:active,
+    .action-tile:hover,
+    .action-tile:active,
+    .press-control:hover,
+    .press-control:active {
+      transform: var(--press-from);
+    }
+
+    .press-media:hover img,
+    .press-media:active img {
+      transform: none;
+    }
+  }
+
+  .pattern-band {
+    --pattern-x: 0px;
+    --pattern-y: 0px;
+    border-top: 1px solid rgb(26 26 26 / 0.1);
+    border-bottom: 1px solid rgb(26 26 26 / 0.1);
+    background-color: var(--bg-base);
+    background-image: radial-gradient(
+      circle,
+      var(--pattern-dot) 1.4px,
+      transparent 1.45px
+    );
+    background-size: var(--pattern-size) var(--pattern-size);
+    background-position: var(--pattern-x) var(--pattern-y);
+    background-repeat: repeat;
+    background-attachment: fixed;
+  }
+
+  .elevate-band {
+    background-color: var(--bg-elevate);
+  }
+
+  .bg-base {
+    background-color: var(--bg-base);
+  }
+
+  .bg-elevate {
+    background-color: var(--bg-elevate);
+  }
+}
+
+.max-w-page {
+  max-width: var(--page-max);
+}
+
+.max-w-hero {
+  max-width: var(--hero-max);
+}
+
+html:has(.image-lightbox[open]),
+html:has(.image-lightbox[open]) body {
+  overflow: hidden;
+  overscroll-behavior: none;
+}

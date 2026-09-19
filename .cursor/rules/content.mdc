@@ -1,0 +1,41 @@
+---
+description: Site copy hygiene - no AI typography artifacts in user-facing text
+alwaysApply: true
+---
+
+# Content copy
+
+User-facing text (UI, `app/data/*`, meta titles, case blurbs) must read like a person wrote it. No AI typography tells.
+
+## Forbidden in site copy
+
+- Em dash `—` and en dash `–` (use ASCII hyphen `-`, comma, or parentheses)
+- Guillemets `« »` (use straight double quotes `"`)
+- Angle brackets as decoration or fake tags (`<word>`, `<<...>>`)
+- Decorative arrows `→` `←` `⇒` in prose (use "to", "then", or `-`)
+- Ellipsis character `…` (use `...`)
+- Emoji checkmarks / crosses in product copy
+
+## Preferred
+
+```text
+BAD:  SaaS platforms—architecture, delivery, and production.
+GOOD: SaaS platforms: architecture, delivery, and production.
+
+BAD:  Nov 2025 – Jul 2026
+GOOD: Nov 2025 - Jul 2026
+
+BAD:  «also built»
+GOOD: "also built"
+
+BAD:  Built → Designed
+GOOD: Built, then Designed
+```
+
+## Scope
+
+- Applies to: page UI, `profile.ts` / other data shown on the site, `title` / `description`, README blurbs that describe the live site
+- Does not rewrite third-party titles you must quote exactly (e.g. a Dribbble shot name); prefer paraphrase when possible
+- Internal planning docs may stay casual, but prefer the same hygiene so examples stay consistent
+
+When generating or editing copy, strip these artifacts before finishing.
